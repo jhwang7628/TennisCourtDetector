@@ -41,6 +41,8 @@ if __name__ == '__main__':
         x_pred, y_pred = postprocess(heatmap, low_thresh=170, max_radius=25)
         if args.use_refine_kps and kps_num not in [8, 12, 9] and x_pred and y_pred:
             x_pred, y_pred = refine_kps(image, int(y_pred), int(x_pred))
+        x_pred = x_pred // 2
+        y_pred = y_pred // 2
         points.append((x_pred, y_pred))
 
     if args.use_homography:
