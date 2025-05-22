@@ -63,3 +63,7 @@ You can check these weights https://drive.google.com/file/d/1f-Co64ehgq4uddcQm1a
 
 ## Infer in video 
 ![](imgs/video_infer.gif) 
+An example command will be:
+```
+python infer_in_image.py --model_path ./model_tennis_court_det.pt --input_path ./43.jpg --output_path ./43_court.jpg --output_csv 43_court.csv
+```

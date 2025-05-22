@@ -1,11 +1,15 @@
+import argparse
+from pathlib import Path
+
 import cv2
 import numpy as np
+import pandas as pd
 import torch
-from tracknet import BallTrackerNet
 import torch.nn.functional as F
-from postprocess import postprocess, refine_kps
+from tracknet import BallTrackerNet
+
 from homography import get_trans_matrix, refer_kps
-import argparse
+from postprocess import postprocess, refine_kps
 
 if __name__ == '__main__':
 
@@ -13,6 +17,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_path', type=str, help='path to model')
     parser.add_argument('--input_path', type=str, help='path to input image')
     parser.add_argument('--output_path', type=str, help='path to output image')
+    parser.add_argument('--output_csv', type=str, default=None, help='path to output court points to csv')
     parser.add_argument('--use_refine_kps', action='store_true', help='whether to use refine kps postprocessing')
     parser.add_argument('--use_homography', action='store_true', help='whether to use homography postprocessing')
     args = parser.parse_args()
@@ -50,6 +55,16 @@ if __name__ == '__main__':
         if matrix_trans is not None:
             points = cv2.perspectiveTransform(refer_kps, matrix_trans)
             points = [np.squeeze(x) for x in points]
+
+    if args.output_csv is not None:
+        points_ndarray = np.vstack(points) # 14 x 2
+        df_data = {
+            "X": points_ndarray[:,0],
+            "Y": points_ndarray[:,1],
+        }
+        df = pd.DataFrame.from_dict(df_data)
+        Path(args.output_csv).parent.mkdir(exist_ok=True, parents=True)
+        df.to_csv(str(args.output_csv), index=False)
 
     for j in range(len(points)):
         if points[j][0] is not None:
