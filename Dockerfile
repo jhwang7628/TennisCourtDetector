@@ -5,8 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4) Copy your inference code
 COPY src/ ./src/
+RUN gdown https://drive.google.com/uc?id=1U3-PyvElqLbZUD_NsVgwRtK4s1HIh5n6 -O /app/model.pt
 
-# 5) Default entrypoint: adjust path/args to match your code
-ENTRYPOINT ["python", "-u", "src/infer.py"]
+ENTRYPOINT ["python", "-u", "src/infer_in_image.py"]
