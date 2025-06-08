@@ -10,7 +10,7 @@ net predictions.
 ## Dataset
 The dataset consists of 8841 images, which were separeted to train set (75%) and validation set (25%). Each image has 14 annotated points. 
 The resolution of images is 1280×720. This dataset contains all court types (hard, clay, grass). Click the link 
-https://drive.google.com/file/d/1lhAaeQCmk2y440PmagA0KmIVBIysVMwu/view?usp=drive_link to download the dataset
+https://drive.google.com/file/d/1U3-PyvElqLbZUD_NsVgwRtK4s1HIh5n6/view?usp=sharing to download the dataset
 
 ### Dataset collection
 This dataset was created in semi-automated way. Video highlights from different tournaments with length from 2 to 3 minutes were downloaded from YouTube. 
