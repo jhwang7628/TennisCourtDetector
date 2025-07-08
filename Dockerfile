@@ -14,4 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 RUN gdown https://drive.google.com/uc?id=1U3-PyvElqLbZUD_NsVgwRtK4s1HIh5n6 -O /app/model.pt
 
-ENTRYPOINT ["python", "-u", "src/infer_in_image.py"]
+ENTRYPOINT [ "bash", "-lc" ]
+CMD ["python", "-u", "src/infer_in_image.py"]
