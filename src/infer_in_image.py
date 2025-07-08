@@ -13,6 +13,8 @@ from postprocess import postprocess, refine_kps
 
 if __name__ == '__main__':
 
+    print("Start inferring tennis court in image")
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str, help='path to model')
     parser.add_argument('--input_path', type=str, help='path to input image')
@@ -27,7 +29,7 @@ if __name__ == '__main__':
     model = model.to(device)
     model.load_state_dict(torch.load(args.model_path, map_location=device))
     model.eval()
-    
+
     OUTPUT_WIDTH = 640
     OUTPUT_HEIGHT = 360
 
